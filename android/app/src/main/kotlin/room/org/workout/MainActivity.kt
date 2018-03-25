@@ -1,4 +1,4 @@
-package 76room.org.workout
+package room.org.workout
 
 import android.os.Bundle
 
