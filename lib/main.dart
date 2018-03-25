@@ -83,7 +83,7 @@ Widget generatePage() {
         child: new Text("Сегодня нет тренировок")
     );
   }
-  var widgets;
+  var widgets = [];
   for (var item in data) {
     widgets.add(new ItemView(text:item));
   }
