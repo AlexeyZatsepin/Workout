@@ -1,8 +1,5 @@
-# workout
+# Workout
 
-A new Flutter project.
+Android and iOS screenshot: 
 
-## Getting Started
-
-For help getting started with Flutter, view our online
-[documentation](https://flutter.io/).
+<a href="url"><img src="https://github.com/AlexeyZatsepin/Workout/blob/master/screenshots/example.png?raw=true" align="center"></a>
