@@ -1,63 +1,55 @@
 import 'package:flutter/material.dart';
-import 'package:workout/details.dart';
+import 'package:workout/about.dart';
+import 'package:workout/home.dart';
 
 void main() {
   runApp(new MaterialApp(
-    home: new HomePage(),
+    home: new MyTabs(),
   ));
 }
 
-class HomePage extends StatefulWidget {
+class MyTabs extends StatefulWidget {
   @override
-  HomePageState createState() => new HomePageState();
+  MyTabsState createState() => new MyTabsState();
 }
 
-class HomePageState extends State<HomePage> {
-  List days;
-  var selected;
+class MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
+  TabController controller;
 
   @override
   void initState() {
     super.initState();
-    days = ['Понедельник', 'Среда', 'Пятница'];
-    DateTime now = new DateTime.now();
-    if (now.weekday == DateTime.monday) {
-      selected = 1;
-    } else if (now.weekday == DateTime.wednesday) {
-      selected = 2;
-    } else if (now.weekday == DateTime.friday) {
-      selected = 3;
-    }
+    controller = new TabController(vsync: this, length: 3);
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(
-        title: new Text('Мои тренировки'),
-      ),
-      body: new ListView.builder(
-        itemCount: days == null ? 0 : days.length,
-        itemBuilder: (BuildContext context, int index) {
-          return new GestureDetector(
-              onTap: () => Navigator.of(context).push(new PageRouteBuilder(
-                pageBuilder: (_, __, ___) => new DetailPage(),
-              )),
-              child: new Container(
-                  decoration: selected == null? null : new BoxDecoration(color: Colors.grey),
-                  padding: new EdgeInsets.all(20.0),
-                  child: new Center(
-                      child: new Text(days[index],
-                          style: new TextStyle(
-                              fontSize: 25.0,
-                              fontFamily: 'RobotoMono'
-                          )
-                      )
-                  )
-              )
-          );
-        },
-      ),
+        bottomNavigationBar: new Material(
+            color: Colors.redAccent,
+            child: new TabBar(
+                controller: controller,
+                tabs: <Tab>[
+                  new Tab(icon: new Icon(Icons.home)),
+                  new Tab(icon: new Icon(Icons.perm_identity)),
+                  new Tab(icon: new Icon(Icons.edit)),
+                ]
+            )
+        ),
+        body: new TabBarView(
+            controller: controller,
+            children: <Widget>[
+              new HomePage(),
+              new AboutPage(),
+              new AboutPage()
+            ]
+        )
     );
   }
 }

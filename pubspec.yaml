@@ -24,6 +24,8 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+      - assets/background.jpg
 
   # To add assets to your application, add an assets section, like this:
   # assets:
@@ -53,5 +55,5 @@ flutter:
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #
-  # For details regarding fonts from package dependencies, 
+  # For details regarding fonts from package dependencies,
   # see https://flutter.io/custom-fonts/#from-packages
