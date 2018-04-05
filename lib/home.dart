@@ -7,7 +7,7 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
-  List days = ['Понедельник', 'Среда', 'Пятница'];
+  var days = ['Понедельник', 'Среда', 'Пятница'];
   var text;
 
   @override
@@ -20,6 +20,8 @@ class HomePageState extends State<HomePage> {
       text = days[1];
     } else if (now.weekday == DateTime.friday) {
       text = days[2];
+    } else {
+      text = "Select?";
     }
   }
 
@@ -56,7 +58,8 @@ class HomePageState extends State<HomePage> {
                       gradient: new LinearGradient(
                           colors: <Color>[Colors.deepOrange, Colors.redAccent]),
                       shape: BoxShape.circle,
-                    )),
+                    )
+                ),
                 new RaisedButton(
                   padding: new EdgeInsets.all(15.0),
                   child: new Text("Начать",
@@ -67,7 +70,7 @@ class HomePageState extends State<HomePage> {
                   textColor: Colors.white,
                   color: Colors.redAccent,
                   onPressed: () {
-
+                    Navigator.of(context).pushNamed('/details');
                   },
                 )
               ],

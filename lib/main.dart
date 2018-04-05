@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:workout/about.dart';
+import 'package:workout/details.dart';
 import 'package:workout/home.dart';
 
 void main() {
   runApp(new MaterialApp(
     home: new MyTabs(),
+    routes: <String, WidgetBuilder> {
+      '/details': (BuildContext context) => new DetailPage(),
+    },
   ));
 }
 
