@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:workout/details.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -21,7 +20,7 @@ class HomePageState extends State<HomePage> {
     } else if (now.weekday == DateTime.friday) {
       text = days[2];
     } else {
-      text = "Select?";
+      text = "Выбрать?";
     }
   }
 
