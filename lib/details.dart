@@ -18,9 +18,9 @@ class DetailPage extends StatelessWidget {
 }
 
 class ItemView extends StatefulWidget {
-  var text;
-  var count;
-  var weight;
+  final String text;
+  final int count;
+  final int weight;
 
   ItemView({this.text, this.count, this.weight});
 
@@ -33,12 +33,31 @@ class ItemViewState extends State<ItemView> {
   var text;
   var count;
   var weight;
+  var _value = 0.0;
+  var selected_count=0;
 
   ItemViewState({this.text, this.count, this.weight});
 
-  void changeData() {
+  void showSlideupView(BuildContext context) {
+    showBottomSheet(
+        context: context,
+        builder: (context) {
+          return new Container(
+            height: 40.0,
+            child: new LinearProgressIndicator(
+              valueColor: new AlwaysStoppedAnimation<Color>(Colors.redAccent),
+              value: _value,
+              backgroundColor: Colors.white,
+            ),
+          );
+        });
+  }
+
+  void changeData(BuildContext context) {
+    showSlideupView(context);
     setState(() {
-//      if (number < 3) number++;
+      selected_count++;
+      _value = selected_count / new DataProvider().getData().length;
     });
   }
 
@@ -82,7 +101,7 @@ class ItemViewState extends State<ItemView> {
                 colors: <Color>[Colors.deepOrange, Colors.redAccent]),
             shape: BoxShape.circle,
           )),
-      onTap: changeData,
+      onTap: () => changeData(context),
     );
   }
 

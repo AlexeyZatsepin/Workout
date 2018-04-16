@@ -6,7 +6,7 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
-  var days = ['Понедельник', 'Среда', 'Пятница'];
+  var days = ['Пн', 'Ср', 'Пт'];
   var text;
 
   @override
@@ -20,7 +20,7 @@ class HomePageState extends State<HomePage> {
     } else if (now.weekday == DateTime.friday) {
       text = days[2];
     } else {
-      text = "Выбрать?";
+      text = "??";
     }
   }
 

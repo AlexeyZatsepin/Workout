@@ -34,7 +34,7 @@ class WorkoutItem {
 }
 
 class DataProvider {
-  var _selected = new DateTime.now();
+  var _selected = new DateTime.now().weekday;
 
   static final DataProvider _singleton = new DataProvider._internal();
 

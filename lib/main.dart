@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:workout/about.dart';
 import 'package:workout/details.dart';
+import 'package:workout/edit.dart';
 import 'package:workout/home.dart';
 
 void main() {
@@ -51,7 +52,7 @@ class MyTabsState extends State<MyTabs> with SingleTickerProviderStateMixin {
             children: <Widget>[
               new HomePage(),
               new AboutPage(),
-              new AboutPage()
+              new EditPage()
             ]
         )
     );
