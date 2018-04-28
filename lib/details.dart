@@ -34,7 +34,9 @@ class ItemViewState extends State<ItemView> {
   var count;
   var weight;
   var _value = 0.0;
-  static var selected_count=0;
+
+  static var done = {};
+  static var selectedCount = {};
 
   ItemViewState({this.text, this.count, this.weight});
 
@@ -42,73 +44,60 @@ class ItemViewState extends State<ItemView> {
     showBottomSheet(
         context: context,
         builder: (context) {
-              new Container(
+          return new Container(
                 height: 40.0,
                 child: new LinearProgressIndicator(
                   valueColor: new AlwaysStoppedAnimation<Color>(Colors.redAccent),
                   value: _value,
                   backgroundColor: Colors.white,
                 ),
-              );
+          );
         });
   }
 
-  void changeData(BuildContext context) {
+  void changeData(BuildContext context, String text) {
     showSlideupView(context);
     setState(() {
-      selected_count++;
-      _value = selected_count / new DataProvider().getData().length;
+      if (selectedCount[text] == null) selectedCount[text] = 1;
+      else selectedCount[text] = selectedCount[text] + 1;
+      _value = selectedCount[text] / 3;
+      if (_value >= 1) {
+        done[text] = true;
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return new ListTile(
-      title: buildText(text),
-      subtitle: buildText('3x$count'),
-      trailing: new Container(
-          margin: new EdgeInsets.only(bottom: 5.0),
-          width: 60.0,
-          height: 60.0,
-          child: new Center(
-            child: new Text(weight.toString(),
-                style: new TextStyle(color: Colors.white, fontWeight: FontWeight.bold)
-          ),
-//            child:  new PopupMenuButton<String>(
-//                initialValue: "10",
-//                onSelected: (String result) { setState(() { _selection = result; });},
-//                padding: EdgeInsets.zero,
-//                itemBuilder: (BuildContext context) => <PopupMenuItem<String>>[
-//                  new PopupMenuItem<String>(
-//                      value: (weight-10).toString(),
-//                      child: new Text((weight-10).toString())
-//                  ),
-//                  new PopupMenuItem<String>(
-//                      value: weight.toString(),
-//                      child: new Text(weight.toString())
-//                  ),
-//                  new PopupMenuItem<String>(
-//                      value: (weight+10).toString(),
-//                      child: new Text((weight+10).toString())
-//                  )
-//                ]
-//            )
-          ),
-          decoration: new BoxDecoration(
-            gradient: new LinearGradient(
-                colors: <Color>[Colors.deepOrange, Colors.redAccent]),
-            shape: BoxShape.circle,
-          )),
-      onTap: () => changeData(context),
+    return new Container(
+      decoration: done[text] != null? new BoxDecoration(
+          color: Colors.black12
+      ) : null,
+      child: new ListTile(
+        title: buildText(text),
+        subtitle: buildText('3x$count'),
+        trailing: new Container(
+            margin: new EdgeInsets.only(bottom: 5.0),
+            width: 60.0,
+            height: 60.0,
+            child: new Center(
+              child: new Text(weight.toString(),
+                  style: new TextStyle(color: Colors.white, fontWeight: FontWeight.bold)
+              ),
+            ),
+            decoration: new BoxDecoration(
+              gradient: new LinearGradient(
+                  colors: <Color>[Colors.deepOrange, Colors.redAccent]),
+              shape: BoxShape.circle,
+            )),
+        onTap: () => changeData(context, text),
+      ),
     );
   }
 
   Text buildText(String text) {
     return new Text(text,
         style: new TextStyle(color: Colors.white, fontWeight: FontWeight.bold));
-  }
-
-  void updateWeight(String value) {
   }
 }
 
