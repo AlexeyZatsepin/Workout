@@ -34,7 +34,7 @@ class ItemViewState extends State<ItemView> {
   var count;
   var weight;
   var _value = 0.0;
-  var selected_count=0;
+  static var selected_count=0;
 
   ItemViewState({this.text, this.count, this.weight});
 
@@ -42,14 +42,14 @@ class ItemViewState extends State<ItemView> {
     showBottomSheet(
         context: context,
         builder: (context) {
-          return new Container(
-            height: 40.0,
-            child: new LinearProgressIndicator(
-              valueColor: new AlwaysStoppedAnimation<Color>(Colors.redAccent),
-              value: _value,
-              backgroundColor: Colors.white,
-            ),
-          );
+              new Container(
+                height: 40.0,
+                child: new LinearProgressIndicator(
+                  valueColor: new AlwaysStoppedAnimation<Color>(Colors.redAccent),
+                  value: _value,
+                  backgroundColor: Colors.white,
+                ),
+              );
         });
   }
 
@@ -64,10 +64,8 @@ class ItemViewState extends State<ItemView> {
   @override
   Widget build(BuildContext context) {
     return new ListTile(
-      title: new Text(text,
-          style: new TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
-      subtitle: new Text('3x$count',
-          style: new TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+      title: buildText(text),
+      subtitle: buildText('3x$count'),
       trailing: new Container(
           margin: new EdgeInsets.only(bottom: 5.0),
           width: 60.0,
@@ -103,6 +101,11 @@ class ItemViewState extends State<ItemView> {
           )),
       onTap: () => changeData(context),
     );
+  }
+
+  Text buildText(String text) {
+    return new Text(text,
+        style: new TextStyle(color: Colors.white, fontWeight: FontWeight.bold));
   }
 
   void updateWeight(String value) {

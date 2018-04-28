@@ -56,8 +56,14 @@ class DataProvider {
     return data;
   }
 
-  void select(var number){
-     _selected = number;
+  void select(String number){
+    if ('Пн' == number) {
+      _selected = DateTime.monday;
+    } else if ('Ср' == number) {
+      _selected = DateTime.wednesday;
+    } else if ('Пт' == number) {
+      _selected = DateTime.friday;
+    }
   }
 }
 
